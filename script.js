@@ -10,21 +10,21 @@ const loaderAnimation = document.getElementById('loader');
 let apiQuote = {};
 
 //Show Loading
-function loading() {
+function showLoadingSpinner() {
     loaderAnimation.hidden = false;
     quoteContainer.hidden = true;
 }
 
 // Hide Loading
-function loadingComplete() {
+function removeLoadingSpinner() {
     loaderAnimation.hidden = true;
     quoteContainer.hidden = false;
 }
 
 // Show New Quote
 function newQuote() {
-    loading();
-    // Pick a random quote from APIQuotes[]
+    showLoadingSpinner();
+    // Pick a random quote from APIQuotes[] - this is from the old API
     // const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     
     //Check if Author field is blank and replace it with 'unknown'
@@ -43,12 +43,12 @@ function newQuote() {
 
     //Set Quote, Hide Loader
     quoteText.textContent = apiQuote.sentence;
-    loadingComplete();
+    removeLoadingSpinner();
 }
 
 // Get Quotes from API
 async function getQuotes() {
-    loading();
+    showLoadingSpinner();
     const apiURL = 'https://game-of-thrones-quotes.herokuapp.com/v1/random';
     try {
         const response = await fetch(apiURL);
